@@ -1,0 +1,62 @@
+#header {
+    background: #ff5722;
+}
+
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: #64ffda;
+}
+
+#header {
+    color: #64ffda;
+}
+
+#header a:link, #header a:visited {
+    color: #64ffda;
+}
+
+h1 {
+    margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 20px;
+    color: #ff9800;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    color: #333;
+    background: #263238;
+}
+
+a.section:link, a.section:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-color: #37474f;
+    background: #ffc107;
+}
+
+#content-related .module h2 {
+    background: #79aec8;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 18px;
+    color: #333;
+}
+
+#content-related .module {
+    background: #ff9800;
+}
+
+#content-related .actionlist li {
+    line-height: 1.2;
+    margin-bottom: 10px;
+    padding-left: 18px;
+    background: #ffc107;
+}
