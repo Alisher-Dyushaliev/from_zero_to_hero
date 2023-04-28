@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load langs_tags %}
+  {% comment %}
+    <nav aria-label="...">
+        <hr>
+        <ul class="pagination pagination-lg justify-content-center">
+            {% get_list_purposes as purposes %}
+            {% for item in purposes %}
+            <li class="page-item"><a class="page-link text-warning bg-primary-subtle border border-success rounded-3" href="{% url 'purpose' item.pk %}">{{ item.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+  {% endcomment %}
 
-</body>
-</html>
+  {% show_purposes arg_2="Purposes" arg_1="Language's" %}

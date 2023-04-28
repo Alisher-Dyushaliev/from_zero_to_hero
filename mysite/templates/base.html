@@ -1,10 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-</body>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.rtl.min.css" integrity="sha384-WJUUqfoMmnfkBLne5uxXj+na/c7sesSJ32gI7GfCk4zO4GthUKhSEGyvQ839BC51" crossorigin="anonymous">
+
+    <title>{% block title %}From Zero to Hero{% endblock %}</title>
+  </head>
+  <body>
+
+  {% include 'include/_navbar.html' %}
+
+          {% block search %}{% endblock %}
+
+          {% block container %}CONTAINER{% endblock %}
+
+          <div class="col-md-12">
+                {% block pagination %}{% endblock %}
+          </div>
+
+          <div class="col-md-12">
+                {% block popularity %}{% endblock %}
+          </div>
+
+          <div class="col-md-12">
+
+              {% if page_obj.has_other_pages %}
+              <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end">
+
+                      {% if page_obj.has_previous %}
+                      <li class="page-item">
+                          <a class="page-link text-info border border-primary rounded-4"
+                             href="?{{ s }}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </a>
+                      </li>
+                      {% endif %}
+
+                      {% for p in page_obj.paginator.page_range %}
+                      {% if page_obj.number == p %}
+                      <li class="page-item active" aria-current="page">
+                          <a class="page-link text-warning border border-primary rounded-3" href="?{{ s }}page={{ p }}">{{ p }}
+                              <span class="sr-only"></span>
+                          </a>
+                      </li>
+                      {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+                      <li class="page-item">
+                          <a class="page-link text-warning border border-primary rounded-3" href="?{{ s }}page={{ p }}">{{ p }}</a>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+
+                      {% if page_obj.has_next %}
+                      <li class="page-item">
+                          <a class="page-link text-info border border-primary rounded-4"
+                             href="?{{ s }}page={{ page_obj.next_page_number }}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                          </a>
+                      </li>
+                      {% endif %}
+
+                  </ul>
+              </nav>
+              {% endif %}
+
+                  {% if messages %}
+                      {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                  <div class="alert alert-danger" role="alert">
+                                      {{ message }}
+                                  </div>
+                            {% else %}
+                                  <div class="alert alert-{{ message.tags }}" role="alert">
+                                      {{ message }}
+                                  </div>
+                            {% endif %}
+                      {% endfor %}
+                  {% endif %}
+
+                {% block card %}CARD{% endblock %}
+
+              {% if page_obj.has_other_pages %}
+              <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-end">
+
+                      {% if page_obj.has_previous %}
+                      <li class="page-item">
+                          <a class="page-link text-info border border-primary rounded-4"
+                             href="?{{ s }}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </a>
+                      </li>
+                      {% endif %}
+
+                      {% for p in page_obj.paginator.page_range %}
+                      {% if page_obj.number == p %}
+                      <li class="page-item active" aria-current="page">
+                          <a class="page-link text-warning border border-primary rounded-3" href="?{{ s }}page={{ p }}">{{ p }}
+                              <span class="sr-only"></span>
+                          </a>
+                      </li>
+                      {% elif p > page_obj.number|add:-3 and p < page_obj.number|add:3 %}
+                      <li class="page-item">
+                          <a class="page-link text-warning border border-primary rounded-3" href="?{{ s }}page={{ p }}">{{ p }}</a>
+                      </li>
+                      {% endif %}
+                      {% endfor %}
+
+                      {% if page_obj.has_next %}
+                      <li class="page-item">
+                          <a class="page-link text-info border border-primary rounded-4"
+                             href="?{{ s }}page={{ page_obj.next_page_number }}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                          </a>
+                      </li>
+                      {% endif %}
+
+                  </ul>
+              </nav>
+              {% endif %}
+
+          </div>
+
+          <div class="col-md-12">
+                {% block tags %}{% endblock %}
+          </div>
+
+          {% comment %}
+          <div class="col-md-12">
+                {% block commentlist %}{% endblock %}
+          </div>
+          {% endcomment %}
+
+    </div>
+  </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="{% static 'js/active.js' %}"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>

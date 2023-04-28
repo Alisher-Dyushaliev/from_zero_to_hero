@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<hr>
+<br>
+<h4><div class="text-warning">Data Bases</div></h4>
+<br>
+{% for area in tags %}
+<a type="button" class="{% cycle 'btn btn-outline-warning' 'btn btn-outline-primary' 'btn btn-outline-danger' 'btn btn-outline-success' 'btn btn-outline-light' 'btn btn-outline-info' %}" href="{{ area.get_absolute_url }}">{{ area.title }}</a>
+{% endfor %}
+<br>
+<br>
+<hr>

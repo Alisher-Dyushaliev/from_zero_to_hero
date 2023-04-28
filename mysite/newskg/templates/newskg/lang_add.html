@@ -1,10 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+    Add Language : {{ block.super }}
+{% endblock %}
+
+{% block container %}
+  <div class='p-3 text-warning bg-warning-subtle border border-primary-subtle rounded-3 container mt-3 text-center'>
+      <h1>{{ title }}</h1>
+      <hr>
+      <div class="row">
+{% endblock %}
+
+{% block card %}
+<h2><div class="text-info">Add Language</div></h2>
+<br>
+        <center>
+        <form action="{% url 'add_lang' %}" method="post">
+          {% csrf_token %}
+
+          <div class="col-md-3 text-info">
+          {{ form.as_p }}
+          </div>
+
+            {% comment %}
+            {{ from.non_fields.errors }}
+            <div class="col-md-3">
+              <label for="{{ form.title.id_for_label }}" class="form-label">Language</label>
+              <input type="text" class="form-control" id="validationCustom01">
+              <div class="invalid-feedback">
+                {{ form.title.errors }}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="{{ form.content.id_for_label }}" class="form-label">Framework</label>
+              <input type="text" class="form-control" id="validationCustom02">
+              <div class="invalid-feedback">
+                {{ form.content.errors }}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label for="{{ form.info.id_for_label }}" class="form-label">Information</label>
+              <input type="text" class="form-control" id="validationCustom03">
+              <div class="invalid-feedback">
+                {{ form.info.errors }}
+              </div>
+            </div>
+            <br>
+            <div class="col-2">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                <label class="form-check-label" for="{{ form.is_published.id_for_label }}">
+                  Publication
+                </label>
+                <div class="invalid-feedback">
+                  {{ form.is_published.errors }}
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="col-md-3">
+              <label for="{{ form.purpose.id_for_label }}" class="form-label">Purpose</label>
+              <select class="form-select" id="validationCustom05">
+                <option selected disabled value="{{ form.purpose }}"></option>
+                <option></option>
+              </select>
+              <div class="invalid-feedback">
+                {{ form.purpose.errors }}
+              </div>
+            </div>
+            {% endcomment %}
+
+            {% comment %}
+            {% for area in form %}
+            <div class="form-group col-md-3">
+                {{ area.label_tag }}
+                {{ area }}
+                <div class="invalid-feedback">
+                    {{ area.errors }}
+                </div>
+            </div>
+            {% endfor %}
+            {% endcomment %}
+
+          <br>
+          <button type="submit" class="btn btn-success btn block">Add Language</button>
+        </form>
+        </center>
+{% endblock %}

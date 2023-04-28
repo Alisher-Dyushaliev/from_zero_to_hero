@@ -27,5 +27,36 @@ body {
     font-size: 14px;
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     color: #333;
-    background: #00838f;
+    background: #263238;
+}
+
+a.section:link, a.section:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-color: #37474f;
+    background: #ffc107;
+}
+
+#content-related .module h2 {
+    background: #79aec8;
+    padding: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #eaeaea;
+    font-size: 18px;
+    color: #333;
+}
+
+#content-related .module {
+    background: #ff9800;
+}
+
+#content-related .actionlist li {
+    line-height: 1.2;
+    margin-bottom: 10px;
+    padding-left: 18px;
+    background: #ffc107;
 }

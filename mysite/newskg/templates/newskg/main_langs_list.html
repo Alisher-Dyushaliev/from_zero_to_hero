@@ -1,10 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load popular_langs %}
 
-</body>
-</html>
+{% block title %}
+    {{ title }} : {{ block.super }}
+{% endblock %}
+
+{% block search %}
+    <div class="d-flex justify-content-start">
+        <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
+            <input class="form-control me-2" type="search" name="s" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block container %}
+  <div class='p-3 text-warning bg-danger-subtle border border-primary-subtle rounded-3 container mt-3 text-center'>
+      <h1>{{ title }}</h1>
+      <hr>
+      <div class="row">
+{% endblock %}
+
+{% block pagination %}
+{% include 'include/_pagination.html' %}
+{% endblock %}
+
+{% block popularity %}
+{% get_popular %}
+{% endblock %}
+
+{% block card %}
+    {% for item in news %}
+    <div class="card mb-3">
+        <div class="card-header text-danger">
+            Purpose: <a href="{{ item.purpose.get_absolute_url }}">{{ item.purpose }}</a>
+        </div>
+        <div class="card-body">
+            <div class="media">
+                {% if item.photo %}
+                <img src="{{ item.photo.url }}" alt="{{ item.title }}" height="200" width="200" class="mr-3">
+                {% else %}
+
+                {% endif %}
+                <div class="media-body">
+                    <h4 class="card-title {% cycle 'text-warning' 'text-success' 'text-info' 'text-danger' 'text-primary' 'text-light' %}">{{ item.title }}</h4>
+                    <h4><p class="card-text {% cycle 'p-3 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-3' 'p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3' 'p-3 text-info-emphasis bg-info-subtle border border-info-subtle rounded-3' 'p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3' 'p-3 text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3' 'p-3 text-light-emphasis bg-light-subtle border border-light-subtle rounded-3' %}">{{ item.content|safe }}</p></h4>
+                    <a href="{{ item.get_absolute_url }}" class="btn btn-success">Information</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            {{ item.created_at|date:"Y-F-d H:i" }}
+        </div>
+        {% if item.tags.exists %}
+        <div class="card-footer text-warning">
+            Data Base:
+            {% for tag in item.tags.all %}
+            <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+{% endblock %}
+
+{% block tags %}
+{% get_tags %}
+{% endblock %}

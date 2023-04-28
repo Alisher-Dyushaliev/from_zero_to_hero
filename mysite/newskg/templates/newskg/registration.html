@@ -1,10 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+    Registration : {{ block.super }}
+{% endblock %}
+
+{% block container %}
+  <div class='p-3 text-warning border border-warning-subtle rounded-3 container mt-3 text-center' style="background-color: #bf360c;">
+      <h1>{{ title }}</h1>
+      <hr>
+      <div class="row">
+{% endblock %}
+
+{% block card %}
+    <h1><div class='text-success-emphasis'>Registration</div></h1>
+    <br>
+
+      <center>
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="col-md-3 text-warning">
+          {{ form.as_p }}
+        </div>
+
+        <br>
+        <button type="submit" class="btn btn-success btn block">Registration</button>
+      </form>
+      </center>
+{% endblock %}

@@ -18,10 +18,25 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from newskg.views import jason, api, vuejs
+
 urlpatterns = [
     path ('admin/', admin.site.urls),
+    path ('ckeditor/', include('ckeditor_uploader.urls')),
+    path ('captcha/', include('captcha.urls')),
+    path ('api/', include('rest_framework.urls')),
+    path ('rest-api/', api),
+    path ('json/', jason, name='api-rest'),
+    path ('vue/', vuejs, name='vue'),
     path ('', include('newskg.urls')),
+    # path ('lang/', LangListView.as_view()),
 ]
 
 if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                                path ('__debug__/', include(debug_toolbar.urls)),
+                          ] + urlpatterns
+
     urlpatterns += static (settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

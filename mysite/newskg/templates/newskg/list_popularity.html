@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% comment %}
+<div class='p-3 text-warning bg-danger-subtle border border-primary-subtle rounded-3 container mt-3 text-center'>
+    <h2>Popular languages</h2>
+    <hr>
+<div class="row">
+  {% for arena in news %}
+  <div class="card-mb-3">
+    <div class="card-body">
+      <div class="media">
+        {% if arena.photo %}
+        <img src="{{ arena.photo.url }}" alt="{{ arena.title }}" height="200" width="200" class="mr-3">
+        {% else %}
 
-</body>
-</html>
+        {% endif %}
+        <div class="media-body">
+          <h5><a href="{{ arena.get_absolute_url }}">{{ arena.title }}</a></h5>
+          <p>{{ arena.purpose }}<span>||</span>{{ arena.created_at|date:"Y-F-d" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+{% endcomment %}
+
+    <hr>
+    <br>
+    <nav aria-label="...">
+        <h4><div class="text-warning">Most viewed Languages</div></h4>
+        <br>
+        <ul class="pagination pagination-lg justify-content-center">
+            {% for arena in langs %}
+            <li class="page-item">
+              <div class="media">
+                {% if arena.photo %}
+                <img src="{{ arena.photo.url }}" alt="{{ arena.title }}" height="150" width="150" class="mr-3">
+                {% else %}
+
+                {% endif %}
+                <div class="media-body">
+                  <h5><a class="page-link text-warning bg-primary-subtle border border-success rounded-3" href="{{ arena.get_absolute_url }}">{{ arena.title }}</a></h5>
+                  <p>{{ arena.purpose }}</p>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+    <hr>

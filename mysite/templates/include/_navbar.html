@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <nav class="navbar navbar-expand-lg bg-primary-subtle">
+      <h3><a class="navbar-brand text-primary" href="{% url 'main' %}">Information Technology</a></h3>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-</body>
-</html>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <span class="navbar-text text-secondary">
+          {% if request.user.is_authenticated %}
+            <h5><span class="text-warning-emphasis">Welcome, {{ user.username }}</span> * <a class="text" style="color: #006064;" href="{% url 'logout' %}">Quit</a></h5>
+          {% else %}
+            <h5><a class='text-success-emphasis' href="{% url 'registration' %}">Registration</a></h5>&<h5><a class='text-success-emphasis' href="{% url 'login' %}">Login</a></h5>
+          {% endif %}
+      </span>
+      </ul>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><h4><a class="nav-link text-info" href="{% url 'main' %}">Main</a></h4></li> ||
+              {% if request.user.is_authenticated %}
+              <li class="nav-item"><h4><a class="nav-link text-info" href="{% url 'add_lang' %}">Add Language</a></h4></li> ||
+              <li class="nav-item"><h4><a class="nav-link text-info" href="{% url 'captcha' %}">Mail</a></h4></li> ||
+              <li class="nav-item"><h4><a class="nav-link text" style="color: #827717;" href="{% url 'api-rest' %}">REST API</a></h4></li>
+              {% endif %}
+          </ul>
+      </div>
+  </nav>

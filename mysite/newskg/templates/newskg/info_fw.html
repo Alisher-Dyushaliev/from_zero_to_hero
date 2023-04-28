@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}
+    {{ fw.title }} : {{ block.super }}
+{% endblock %}
+
+{% block container %}
+  <div class='p-3 text-warning bg-success-subtle border border-primary-subtle rounded-3 container mt-3 text-center'>
+      <h1>{{ title }}</h1>
+      <hr>
+      <div class="row">
+{% endblock %}
+
+{% block pagination %}
+{% include 'include/_pagination.html' %}
+{% endblock %}
+
+{% block card %}
+    <div class="card mb-3">
+        <div class="card-header text-danger">
+            Purpose: <a href="{{ fw.purpose.get_absolute_url }}">{{ fw.purpose }}</a>
+        </div>
+        <div class="card-body">
+                {% if fw.photo %}
+                <img src="{{ fw.photo.url }}" alt="" height="200" width="200" class=" float-left mr-3">
+                {% else %}
+
+                {% endif %}
+                    <h3 class="card-title text-info">{{ fw.title }}</h3>
+                    <h3><p class="card-text text-warning">{{ fw.content|safe }}</p></h3>
+                    <span class="card-text text-success">{{ fw.info|safe|linebreaks }}</span>
+        </div>
+        <div class="card-footer text-muted">
+            {{ fw.created_at|date:"Y-F-d H:i" }}
+        </div>
+    </div>
+{% endblock %}
